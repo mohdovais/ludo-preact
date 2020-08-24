@@ -1,3 +1,7 @@
+const GREEN_BASE = "#009900";
+const RED_BASE = "hsl(0deg 100% 70%)";
+const BLUE_BASE = "#000099";
+
 export function Background() {
   return (
     <>
@@ -16,7 +20,7 @@ export function Background() {
         <polygon
           id="arrow"
           points="50,10 50,90 30,70 50,90 70,70 50,90"
-          fill="green"
+          fill={GREEN_BASE}
           stroke="black"
           strokeWidth="10"
         />
@@ -29,25 +33,25 @@ export function Background() {
         />
       </defs>
       <g id="bases">
-        <use xlinkHref="#base" fill="red" />
-        <use xlinkHref="#base" x="900" fill="green" />
-        <use xlinkHref="#base" y="900" fill="blue" />
+        <use xlinkHref="#base" fill={RED_BASE} />
+        <use xlinkHref="#base" x="900" fill={GREEN_BASE} />
+        <use xlinkHref="#base" y="900" fill={BLUE_BASE} />
         <use xlinkHref="#base" x="900" y="900" fill="yellow" />
       </g>
       <g id="home">
         <polygon
           points="750,750 600,600 900,600 750,750"
-          fill="green"
+          fill={GREEN_BASE}
           stroke="black"
         />
         <polygon
           points="750,750 600,600 600,900 750,750"
-          fill="red"
+          fill={RED_BASE}
           stroke="black"
         />
         <polygon
           points="750,750 600,900 900,900 750,750"
-          fill="blue"
+          fill={BLUE_BASE}
           stroke="black"
         />
         <polygon
@@ -65,37 +69,37 @@ export function Background() {
 
       <g id="row2">
         <rect y="100" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="100" x="700" width="100" height="100" fill="green"></rect>
-        <rect y="100" x="800" width="100" height="100" fill="green"></rect>
+        <rect y="100" x="700" width="100" height="100" fill={GREEN_BASE}></rect>
+        <rect y="100" x="800" width="100" height="100" fill={GREEN_BASE}></rect>
       </g>
 
       <g id="row3">
         <rect y="200" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="200" x="700" width="100" height="100" fill="green"></rect>
+        <rect y="200" x="700" width="100" height="100" fill={GREEN_BASE}></rect>
         <rect y="200" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g id="row4">
         <rect y="300" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="300" x="700" width="100" height="100" fill="green"></rect>
+        <rect y="300" x="700" width="100" height="100" fill={GREEN_BASE}></rect>
         <rect y="300" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g id="row5">
         <rect y="400" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="400" x="700" width="100" height="100" fill="green"></rect>
+        <rect y="400" x="700" width="100" height="100" fill={GREEN_BASE}></rect>
         <rect y="400" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g id="row6">
         <rect y="500" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="500" x="700" width="100" height="100" fill="green"></rect>
+        <rect y="500" x="700" width="100" height="100" fill={GREEN_BASE}></rect>
         <rect y="500" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g id="row7">
         <rect y="600" x="0" width="100" height="100" fill="white"></rect>
-        <rect y="600" x="100" width="100" height="100" fill="red"></rect>
+        <rect y="600" x="100" width="100" height="100" fill={RED_BASE}></rect>
         <rect y="600" x="200" width="100" height="100" fill="white"></rect>
         <rect y="600" x="300" width="100" height="100" fill="white"></rect>
         <rect y="600" x="400" width="100" height="100" fill="white"></rect>
@@ -111,11 +115,11 @@ export function Background() {
 
       <g>
         <rect y="700" x="0" width="100" height="100" fill="white"></rect>
-        <rect y="700" x="100" width="100" height="100" fill="red"></rect>
-        <rect y="700" x="200" width="100" height="100" fill="red"></rect>
-        <rect y="700" x="300" width="100" height="100" fill="red"></rect>
-        <rect y="700" x="400" width="100" height="100" fill="red"></rect>
-        <rect y="700" x="500" width="100" height="100" fill="red"></rect>
+        <rect y="700" x="100" width="100" height="100" fill={RED_BASE}></rect>
+        <rect y="700" x="200" width="100" height="100" fill={RED_BASE}></rect>
+        <rect y="700" x="300" width="100" height="100" fill={RED_BASE}></rect>
+        <rect y="700" x="400" width="100" height="100" fill={RED_BASE}></rect>
+        <rect y="700" x="500" width="100" height="100" fill={RED_BASE}></rect>
 
         <rect y="700" x="900" width="100" height="100" fill="yellow"></rect>
         <rect y="700" x="1000" width="100" height="100" fill="yellow"></rect>
@@ -143,31 +147,31 @@ export function Background() {
 
       <g>
         <rect y="900" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="900" x="700" width="100" height="100" fill="blue"></rect>
+        <rect y="900" x="700" width="100" height="100" fill={BLUE_BASE}></rect>
         <rect y="900" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g>
         <rect y="1000" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="1000" x="700" width="100" height="100" fill="blue"></rect>
+        <rect y="1000" x="700" width="100" height="100" fill={BLUE_BASE}></rect>
         <rect y="1000" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g>
         <rect y="1100" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="1100" x="700" width="100" height="100" fill="blue"></rect>
+        <rect y="1100" x="700" width="100" height="100" fill={BLUE_BASE}></rect>
         <rect y="1100" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g>
         <rect y="1200" x="600" width="100" height="100" fill="white"></rect>
-        <rect y="1200" x="700" width="100" height="100" fill="blue"></rect>
+        <rect y="1200" x="700" width="100" height="100" fill={BLUE_BASE}></rect>
         <rect y="1200" x="800" width="100" height="100" fill="white"></rect>
       </g>
 
       <g>
-        <rect y="1300" x="600" width="100" height="100" fill="blue"></rect>
-        <rect y="1300" x="700" width="100" height="100" fill="blue"></rect>
+        <rect y="1300" x="600" width="100" height="100" fill={BLUE_BASE}></rect>
+        <rect y="1300" x="700" width="100" height="100" fill={BLUE_BASE}></rect>
         <rect y="1300" x="800" width="100" height="100" fill="white"></rect>
       </g>
 

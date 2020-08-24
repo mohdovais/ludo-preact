@@ -57,6 +57,8 @@ function onMove(state, player, tokenId) {
   const token = state[player].tokens[tokenId];
   if (token && token.enabled) {
     return produce(state, (draft) => {
+      const { roll, allPlayers, currentPlayer } = draft;
+
       // disable all tokens for next roll
       draft[player].tokens.forEach((token) => {
         token.enabled = false;
@@ -64,6 +66,15 @@ function onMove(state, player, tokenId) {
 
       // move
       draft[player].tokens[tokenId].position += draft.roll;
+
+      // was 6?
+      if (roll !== 6) {
+        draft.currentPlayer = (allPlayers + allPlayers)[
+          allPlayers.indexOf(currentPlayer) + 1
+        ];
+      }
+
+      draft.roll = 0;
     });
   }
 
