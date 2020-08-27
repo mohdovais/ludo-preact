@@ -1,15 +1,15 @@
 import { produce } from "immer";
 
-export function reducer(state, action) {
+export const reducer = produce((state, action) => {
   switch (action.type) {
     case "roll":
       console.log(action.value);
-      return onRoll(state, action.value);
+      onRoll(state, action.value);
+      break;
     case "move":
-      return onMove(state, action.player, action.tokenId);
+      onMove(state, action.player, action.tokenId);
   }
-  return state;
-}
+});
 
 /**
  *
@@ -38,45 +38,43 @@ function onRoll(state, roll) {
   const canMove = canMoveAnyToken(player.tokens, roll);
 
   if (canMove) {
-    return produce(state, (draft) => {
-      draft.roll = roll;
-      draft[currentPlayer].tokens = enableMoveableTokens(player.tokens, roll);
+    state.roll = roll;
+    //state[currentPlayer].tokens = enableMoveableTokens(player.tokens, roll);
+    player.tokens.forEach((token) => {
+      const next = token.position + roll;
+      return Object.assign({}, token, {
+        enabled: next > -1 && next < 56,
+      });
     });
-  }
-
-  return produce(state, (draft) => {
-    draft.roll = 0;
-    draft.currentPlayer = (allPlayers + allPlayers)[
+  } else {
+    state.roll = 0;
+    state.currentPlayer = (allPlayers + allPlayers)[
       allPlayers.indexOf(currentPlayer) + 1
     ];
-  });
+  }
 }
 
 //{ id: 0, player: A, position: INITIAL_POSITION, enabled: false }
 function onMove(state, player, tokenId) {
   const token = state[player].tokens[tokenId];
   if (token && token.enabled) {
-    return produce(state, (draft) => {
-      const { roll, allPlayers, currentPlayer } = draft;
+    const { roll, allPlayers, currentPlayer } = state;
 
-      // disable all tokens for next roll
-      draft[player].tokens.forEach((token) => {
-        token.enabled = false;
-      });
-
-      // move
-      draft[player].tokens[tokenId].position += draft.roll;
-
-      // was 6?
-      if (roll !== 6) {
-        draft.currentPlayer = (allPlayers + allPlayers)[
-          allPlayers.indexOf(currentPlayer) + 1
-        ];
-      }
-
-      draft.roll = 0;
+    // disable all tokens for next roll
+    state[player].tokens.forEach((token) => {
+      token.enabled = false;
     });
-  }
 
-  return state;
+    // move
+    state[player].tokens[tokenId].position += state.roll;
+
+    // was 6?
+    if (roll !== 6) {
+      state.currentPlayer = (allPlayers + allPlayers)[
+        allPlayers.indexOf(currentPlayer) + 1
+      ];
+    }
+
+    state.roll = 0;
+  }
 }
