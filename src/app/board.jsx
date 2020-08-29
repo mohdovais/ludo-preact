@@ -1,5 +1,4 @@
 import { Background } from "./background";
-import { path } from "../store/path";
 
 const TOKEN_INITIAL_POSITIONS = {
   A: [
@@ -35,14 +34,6 @@ const TOKEN_COLORS = {
   D: "yellow",
 };
 
-function getXY(player, position) {
-  const { x, y } = path.getPath(player, position);
-  return {
-    x: x * 100,
-    y: y * 100,
-  };
-}
-
 export function Board({ tokens, onTokenSelect }) {
   return (
     <svg
@@ -53,11 +44,14 @@ export function Board({ tokens, onTokenSelect }) {
     >
       <Background />
       {tokens.map((token) => {
-        const { id: tokenId, player, position, enabled } = token;
+        const { id: tokenId, player, position, enabled, x, y } = token;
         const xy =
           position === -6
             ? TOKEN_INITIAL_POSITIONS[player][tokenId]
-            : getXY(player, position);
+            : {
+                x: x * 100,
+                y: y * 100,
+              };
 
         return (
           <use

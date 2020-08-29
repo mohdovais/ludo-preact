@@ -6,40 +6,35 @@ import {
   PLAYER_D,
 } from "./constant";
 
+const createTokens = (player) =>
+  [0, 1, 2, 3].map((id) => ({
+    id,
+    player,
+    position: INITIAL_POSITION,
+    enabled: false,
+    x: -1,
+    y: -1,
+  }));
+
 export const initialState = {
-  allPlayers: "ABCD",
+  allPlayers: [PLAYER_A, PLAYER_B, PLAYER_C, PLAYER_D],
+  winners: [],
   currentPlayer: PLAYER_A,
-  roll: 0,
+  rolling: true,
   A: {
-    tokens: [
-      { id: 0, player: PLAYER_A, position: INITIAL_POSITION, enabled: false },
-      { id: 1, player: PLAYER_A, position: INITIAL_POSITION, enabled: false },
-      { id: 2, player: PLAYER_A, position: INITIAL_POSITION, enabled: false },
-      { id: 3, player: PLAYER_A, position: INITIAL_POSITION, enabled: false },
-    ],
+    roll: 0,
+    tokens: createTokens(PLAYER_A),
   },
   B: {
-    tokens: [
-      { id: 0, player: PLAYER_B, position: INITIAL_POSITION, enabled: false },
-      { id: 1, player: PLAYER_B, position: INITIAL_POSITION, enabled: false },
-      { id: 2, player: PLAYER_B, position: INITIAL_POSITION, enabled: false },
-      { id: 3, player: PLAYER_B, position: INITIAL_POSITION, enabled: false },
-    ],
+    roll: 0,
+    tokens: createTokens(PLAYER_B),
   },
   C: {
-    tokens: [
-      { id: 0, player: PLAYER_C, position: INITIAL_POSITION, enabled: false },
-      { id: 1, player: PLAYER_C, position: INITIAL_POSITION, enabled: false },
-      { id: 2, player: PLAYER_C, position: INITIAL_POSITION, enabled: false },
-      { id: 3, player: PLAYER_C, position: INITIAL_POSITION, enabled: false },
-    ],
+    roll: 0,
+    tokens: createTokens(PLAYER_C),
   },
   D: {
-    tokens: [
-      { id: 0, player: PLAYER_D, position: INITIAL_POSITION, enabled: false },
-      { id: 1, player: PLAYER_D, position: INITIAL_POSITION, enabled: false },
-      { id: 2, player: PLAYER_D, position: INITIAL_POSITION, enabled: false },
-      { id: 3, player: PLAYER_D, position: INITIAL_POSITION, enabled: false },
-    ],
+    roll: 0,
+    tokens: createTokens(PLAYER_D),
   },
 };

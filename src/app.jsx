@@ -3,36 +3,37 @@ import { initialState } from "./store/state";
 import { reducer } from "./store/reducer";
 import { Board } from "./app/board";
 import { Dice } from "./app/dice";
+import { PLAYER_A, PLAYER_B, PLAYER_C, PLAYER_D } from "./store/constant";
 
-export function App(props) {
+export function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { currentPlayer, roll } = state;
+  const { currentPlayer, rolling } = state;
   console.log(state);
   return (
     <div>
       <Dice
-        player="A"
-        disabled={roll > 0 || currentPlayer !== "A"}
+        player={PLAYER_A}
+        disabled={!(rolling && currentPlayer === PLAYER_A)}
         onClick={(value) => dispatch({ type: "roll", value })}
-        value={currentPlayer === "A" ? roll : 0}
+        value={state[PLAYER_A].roll}
       />
       <Dice
-        player="B"
-        disabled={roll > 0 || currentPlayer !== "B"}
+        player={PLAYER_B}
+        disabled={!(rolling && currentPlayer === PLAYER_B)}
         onClick={(value) => dispatch({ type: "roll", value })}
-        value={currentPlayer === "B" ? roll : 0}
+        value={state[PLAYER_B].roll}
       />
       <Dice
-        player="C"
-        disabled={roll > 0 || currentPlayer !== "C"}
+        player={PLAYER_C}
+        disabled={!(rolling && currentPlayer === PLAYER_C)}
         onClick={(value) => dispatch({ type: "roll", value })}
-        value={currentPlayer === "C" ? roll : 0}
+        value={state[PLAYER_C].roll}
       />
       <Dice
-        player="D"
-        disabled={roll > 0 || currentPlayer !== "D"}
+        player={PLAYER_D}
+        disabled={!(rolling && currentPlayer === PLAYER_D)}
         onClick={(value) => dispatch({ type: "roll", value })}
-        value={currentPlayer === "D" ? roll : 0}
+        value={state[PLAYER_D].roll}
       />
       <Board
         tokens={state.A.tokens.concat(
