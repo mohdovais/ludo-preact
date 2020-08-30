@@ -1,5 +1,5 @@
 import { produce, current } from "immer";
-import { getMoveableTokens, getNextPlayer } from "./player";
+import { getMoveableTokens, getNextPlayer, continueRolling } from "./player";
 import { MAX_POSITION } from "./constant";
 import { path } from "./path";
 
@@ -40,8 +40,7 @@ function onRoll(state, roll) {
       });
     }
   } else {
-    state.currentPlayer = getNextPlayer(state);
-    state.rolling = true;
+    continueRolling(state, true);
   }
 }
 
@@ -66,27 +65,33 @@ function onMove(state, playerName, tokenId, forced) {
     token.y = path0.y;
 
     if (token.position === MAX_POSITION) {
-      if (tokens.every(({ position }) => position === MAX_POSITION)) {
-        // @TODO make winner
-        state.currentPlayer = getNextPlayer(state);
-      } else {
-        player.roll = 0;
-        state.rolling = true;
-      }
-
-      return;
+      // @TODO make winner
+      const won = tokens.every(({ position }) => position === MAX_POSITION);
+      return continueRolling(state, won);
     }
 
     if (!path[playerName][token.position].star) {
-      // return;
+      let beating = false;
+      state.allPlayers
+        .filter((player) => player !== playerName)
+        .forEach((player) => {
+          state[player].tokens.forEach((opponent) => {
+            if (opponent.x === token.x && opponent.y === token.y) {
+              opponent.x = -1;
+              opponent.y = -1;
+              opponent.position = -6;
+              player.roll = 0;
+              state.rolling = true;
+              beating = true;
+            }
+          });
+        });
+
+      if (beating) {
+        return continueRolling(state);
+      }
     }
 
-    if (roll === 6) {
-      player.roll = 0;
-      state.rolling = true;
-    } else {
-      state.currentPlayer = getNextPlayer(state);
-      state.rolling = true;
-    }
+    continueRolling(state, roll !== 6);
   }
 }

@@ -13,21 +13,6 @@ export function getMoveableTokens(tokens, roll) {
 
 /**
  *
- * @param {array} tokens
- * @param {number} roll
- * @returns {boolean}
- */
-export function canMoveOnlyOneToken(tokens, roll) {
-  return (
-    tokens.filter(({ position }) => {
-      const next = position + roll;
-      return next > -1 && next < 56;
-    }).length === 1
-  );
-}
-
-/**
- *
  * @param {array} allPlayers
  * @param {string} currentPlayer
  */
@@ -59,4 +44,20 @@ export function getNextPlayer(state) {
   }
 
   return probableNextPlayer;
+}
+
+/**
+ *
+ * @param {object} state
+ * @param {boolean} next
+ */
+export function continueRolling(state, next) {
+  if (next) {
+    state.currentPlayer = getNextPlayer(state);
+  }
+
+  const player = state[state.currentPlayer];
+
+  player.roll = 0;
+  state.rolling = true;
 }

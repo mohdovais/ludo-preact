@@ -16,24 +16,28 @@ export function App() {
         disabled={!(rolling && currentPlayer === PLAYER_A)}
         onClick={(value) => dispatch({ type: "roll", value })}
         value={state[PLAYER_A].roll}
+        style={{ backgroundColor: "blue", color: "#fff" }}
       />
       <Dice
         player={PLAYER_B}
         disabled={!(rolling && currentPlayer === PLAYER_B)}
         onClick={(value) => dispatch({ type: "roll", value })}
         value={state[PLAYER_B].roll}
+        style={{ backgroundColor: "red" }}
       />
       <Dice
         player={PLAYER_C}
         disabled={!(rolling && currentPlayer === PLAYER_C)}
         onClick={(value) => dispatch({ type: "roll", value })}
         value={state[PLAYER_C].roll}
+        style={{ backgroundColor: "green", color: "#fff" }}
       />
       <Dice
         player={PLAYER_D}
         disabled={!(rolling && currentPlayer === PLAYER_D)}
         onClick={(value) => dispatch({ type: "roll", value })}
         value={state[PLAYER_D].roll}
+        style={{ backgroundColor: "yellow" }}
       />
       <Board
         tokens={state.A.tokens.concat(
