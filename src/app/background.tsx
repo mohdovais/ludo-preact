@@ -19,20 +19,6 @@ export function Background() {
           <circle cx="200" cy="400" r="64" />
           <circle cx="400" cy="400" r="64" />
         </g>
-        <polygon
-          id="arrow"
-          points="50,10 50,90 30,70 50,90 70,70 50,90"
-          fill={C_BASE}
-          stroke="black"
-          strokeWidth="10"
-        />
-        <circle
-          id="disk"
-          cx="50"
-          cy="50"
-          r="32"
-          style="filter: drop-shadow(0 0 3px #000);stroke: black;"
-        />
       </defs>
       <g id="bases">
         <use xlinkHref="#base" fill={B_BASE} />

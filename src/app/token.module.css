@@ -1,0 +1,21 @@
+.active {
+  cursor: pointer;
+}
+
+.highlight {
+  stroke-dasharray: 5 5;
+  stroke-width: 2px;
+  fill: transparent;
+  stroke: #000;
+  animation: h 1s infinite;
+}
+
+@keyframes h {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: 50;
+  }
+}

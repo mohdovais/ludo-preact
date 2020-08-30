@@ -1,40 +1,31 @@
 import {
-  PLAYER_D,
-  PLAYER_C,
-  PLAYER_B,
-  PLAYER_A,
+  PlayerName,
   MAX_POSITION,
 } from "./constant";
 
-/**
- *
- * @param {array} array
- * @returns {array}
- */
-const createPath = (array) =>
-  Object.freeze(
-    array.map((step) => {
-      step.tokens = [];
-      Object.freeze(step);
-      return step;
-    })
-  );
+interface IndividualPath {
+  readonly x: number,
+  readonly y: number,
+  readonly star?: boolean
+}
 
-/**
- *
- * @param {array} array
- * @param {number} start
- * @param {array} additional
- * @returns {array}
- */
-const createPlayerPath = (array, start, additional) => {
-  return Object.freeze(
-    array.slice(start, start + MAX_POSITION).concat(additional)
-  );
+interface Path {
+  [PlayerName.A]: IndividualPath[]
+  [PlayerName.B]: IndividualPath[]
+  [PlayerName.C]: IndividualPath[]
+  [PlayerName.D]: IndividualPath[]
+}
+
+function createPlayerPath(
+  array: IndividualPath[],
+  start: number,
+  additional: IndividualPath[]
+) {
+  return array.slice(start, start + MAX_POSITION).concat(additional)
 };
 
-export const path = (function () {
-  const COMMON_PATH = createPath([
+export const path: Path = (function () {
+  const COMMON_PATH = [
     { x: 6, y: 13, star: true },
     { x: 6, y: 12 },
     { x: 6, y: 11 },
@@ -87,47 +78,47 @@ export const path = (function () {
     { x: 8, y: 14 },
     { x: 7, y: 14 },
     { x: 6, y: 14 },
-  ]);
+  ];
 
-  const A_IN = createPath([
+  const A_IN = [
     { x: 7, y: 13 },
     { x: 7, y: 12 },
     { x: 7, y: 11 },
     { x: 7, y: 10 },
     { x: 7, y: 9 },
-  ]);
+  ];
 
-  const B_IN = createPath([
+  const B_IN = [
     { x: 1, y: 7 },
     { x: 2, y: 7 },
     { x: 3, y: 7 },
     { x: 4, y: 7 },
     { x: 5, y: 7 },
-  ]);
+  ];
 
-  const C_IN = createPath([
+  const C_IN = [
     { x: 7, y: 1 },
     { x: 7, y: 2 },
     { x: 7, y: 3 },
     { x: 7, y: 4 },
     { x: 7, y: 5 },
-  ]);
+  ];
 
-  const D_IN = createPath([
+  const D_IN = [
     { x: 13, y: 7 },
     { x: 12, y: 7 },
     { x: 11, y: 7 },
     { x: 10, y: 7 },
     { x: 9, y: 7 },
-  ]);
-  
+  ];
+
   const PATH = COMMON_PATH.concat(COMMON_PATH);
-  const players = {};
 
-  players[PLAYER_A] = createPlayerPath(PATH, 0, A_IN);
-  players[PLAYER_B] = createPlayerPath(PATH, 13, B_IN);
-  players[PLAYER_C] = createPlayerPath(PATH, 26, C_IN);
-  players[PLAYER_D] = createPlayerPath(PATH, 39, D_IN);
+  return {
+    [PlayerName.A]: createPlayerPath(PATH, 0, A_IN),
+    [PlayerName.B]: createPlayerPath(PATH, 13, B_IN),
+    [PlayerName.C]: createPlayerPath(PATH, 26, C_IN),
+    [PlayerName.D]: createPlayerPath(PATH, 39, D_IN)
+  }
 
-  return players;
 })();

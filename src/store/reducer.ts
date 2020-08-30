@@ -1,16 +1,17 @@
 import { produce, current } from "immer";
-import { getMoveableTokens, getNextPlayer, continueRolling } from "./player";
-import { MAX_POSITION } from "./constant";
+import { getMoveableTokens, continueRolling } from "./player";
+import { MAX_POSITION, PlayerName } from "./constant";
 import { path } from "./path";
+import { GameState, Dice } from "./state";
 
-export const reducer = produce((state, action) => {
+export const reducer = produce((state: GameState, action) => {
   switch (action.type) {
     case "roll":
       console.log(action.value);
       onRoll(state, action.value);
       break;
     case "move":
-      onMove(state, action.player, action.tokenId);
+      onMove(state, action.player, action.tokenId, false);
   }
 });
 
@@ -19,21 +20,18 @@ export const reducer = produce((state, action) => {
  *    if only one token can move; move automatically
  *    else enable playable tokens to select
  * else move to next player
- *
- * @param {*} state
- * @param {*} roll
  */
-function onRoll(state, roll) {
-  const { currentPlayer } = state;
-  const currentPlayerObject = state[currentPlayer];
-  const moveableTokens = getMoveableTokens(currentPlayerObject.tokens, roll);
+function onRoll(state: GameState, roll: Dice) {
+  const { currentPlayerName } = state;
+  const currentPlayer = state[currentPlayerName];
+  const moveableTokens = getMoveableTokens(currentPlayer.tokens, roll);
 
   state.rolling = false;
-  currentPlayerObject.roll = roll;
+  currentPlayer.roll = roll;
 
   if (moveableTokens.length > 0) {
     if (moveableTokens.length === 1) {
-      onMove(state, currentPlayer, moveableTokens[0].id, true);
+      onMove(state, currentPlayerName, moveableTokens[0].id, true);
     } else {
       moveableTokens.forEach((token) => {
         token.enabled = true;
@@ -44,8 +42,12 @@ function onRoll(state, roll) {
   }
 }
 
-//{ id: 0, player: A, position: INITIAL_POSITION, enabled: false }
-function onMove(state, playerName, tokenId, forced) {
+function onMove(
+  state: GameState,
+  playerName: PlayerName,
+  tokenId: number,
+  forced: boolean
+) {
   const player = state[playerName];
   const { tokens } = player;
   const token = tokens.find((token) => token.id === tokenId);
@@ -71,24 +73,22 @@ function onMove(state, playerName, tokenId, forced) {
     }
 
     if (!path[playerName][token.position].star) {
-      let beating = false;
-      state.allPlayers
-        .filter((player) => player !== playerName)
-        .forEach((player) => {
-          state[player].tokens.forEach((opponent) => {
+      let opponentTokenRemoved = false;
+      state.allPlayerNames
+        .filter((name) => name !== playerName)
+        .forEach((name) => {
+          state[name].tokens.forEach((opponent) => {
             if (opponent.x === token.x && opponent.y === token.y) {
               opponent.x = -1;
               opponent.y = -1;
               opponent.position = -6;
-              player.roll = 0;
-              state.rolling = true;
-              beating = true;
+              opponentTokenRemoved = true;
             }
           });
         });
 
-      if (beating) {
-        return continueRolling(state);
+      if (opponentTokenRemoved) {
+        return continueRolling(state, false);
       }
     }
 
