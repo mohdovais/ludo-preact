@@ -15,6 +15,12 @@ export const reducer = produce((state: GameState, action) => {
   }
 });
 
+export function init(state: GameState) {
+  return produce(state, draft => {
+    onRoll(draft, 6)
+  })
+}
+
 /**
  * if player can move any tokens
  *    if only one token can move; move automatically

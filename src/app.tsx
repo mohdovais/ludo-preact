@@ -4,6 +4,7 @@ import { reducer } from "./store/reducer";
 import { Board } from "./app/board";
 import { Dice } from "./app/dice";
 import { PlayerName } from "./store/constant";
+//import { Face } from "./app/dice";
 
 export function App() {
   const [state, dispatch] = useReducer(reducer, initialState);

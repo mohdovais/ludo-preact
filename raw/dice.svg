@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+    <defs>
+        <radialGradient id="diceDot">
+            <stop offset="50%" stop-color="#000" />
+            <stop offset="95%" stop-color="hsl(0, 0%, 30%)" />
+        </radialGradient>
+    </defs>
+    <rect x="5" y="5" width="290" height="290" rx="25" fill="hsl(0, 0%, 92%)" stroke="hsl(0, 0%, 88%)" stroke-width="5" />
+    <circle r="30" cx="60" cy="60" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="150" cy="60" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="240" cy="60" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="60" cy="150" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="150" cy="150" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="240" cy="150" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="60" cy="240" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="150" cy="240" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+    <circle r="30" cx="240" cy="240" fill="url('#diceDot')" stroke="#000" stroke-width="2" />
+</svg>

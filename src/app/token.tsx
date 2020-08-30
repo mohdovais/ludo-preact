@@ -12,7 +12,10 @@ export function Token({ fill, x, y, active, onClick }: TokenProps) {
   return (
     <g>
       {active ? (
-        <circle cx={x + 50} cy={y + 50} r="40" className={style.highlight}></circle>
+        <circle cx={x + 50} cy={y + 50} r="40" className={style.highlight} vector-effect="non-scaling-stroke"></circle>
+      ) : null}
+      {active ? (
+        <circle cx={x + 50} cy={y + 50} r="40" className={style.highlight_white} vector-effect="non-scaling-stroke"></circle>
       ) : null}
       <circle
         cx={x + 50}
