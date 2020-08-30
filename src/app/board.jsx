@@ -1,38 +1,5 @@
 import { Background } from "./background";
-
-const TOKEN_INITIAL_POSITIONS = {
-  A: [
-    { x: 150, y: 1050 },
-    { x: 350, y: 1050 },
-    { x: 150, y: 1250 },
-    { x: 350, y: 1250 },
-  ],
-  B: [
-    { x: 150, y: 150 },
-    { x: 350, y: 150 },
-    { x: 150, y: 350 },
-    { x: 350, y: 350 },
-  ],
-  C: [
-    { x: 1050, y: 150 },
-    { x: 1250, y: 150 },
-    { x: 1050, y: 350 },
-    { x: 1250, y: 350 },
-  ],
-  D: [
-    { x: 1050, y: 1050 },
-    { x: 1250, y: 1050 },
-    { x: 1050, y: 1250 },
-    { x: 1250, y: 1250 },
-  ],
-};
-
-const TOKEN_COLORS = {
-  A: "blue",
-  B: "red",
-  C: "green",
-  D: "yellow",
-};
+import { TOKEN_COLORS, TOKEN_INITIAL_POSITIONS } from "./constant";
 
 export function Board({ tokens, onTokenSelect }) {
   return (
